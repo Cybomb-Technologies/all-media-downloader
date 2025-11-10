@@ -64,6 +64,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.cybomb.allmediadownloader.BuildConfig
+import com.cybomb.allmediadownloader.BuildConfig.BANNER_AD_UNIT_ID
 import com.cybomb.allmediadownloader.datamodels.DownloaderViewModel
 import com.cybomb.allmediadownloader.datamodels.downloaderItems
 import com.cybomb.allmediadownloader.fetcher.FacebookFetcher
@@ -106,6 +108,8 @@ fun DownloaderScreen(
     LaunchedEffect(selectedPlatformArg) {
         viewModel.selectPlatform(selectedPlatformArg)
     }
+
+    val bannerAdUnitId = BANNER_AD_UNIT_ID // No need to define it locally
 
     // Collect state from ViewModel
     val screenState by viewModel.state.collectAsState()
@@ -309,7 +313,7 @@ fun DownloaderScreen(
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
                     }
                 },
-                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+                colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.surface,
                     titleContentColor = Color.Black
                 )
@@ -507,6 +511,7 @@ fun DownloaderScreen(
             }
 
             Spacer(Modifier.height(48.dp))
+            AdBannerViewCollab(bannerAdUnitId = bannerAdUnitId)
         }
     }
 }

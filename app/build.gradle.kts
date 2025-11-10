@@ -19,6 +19,8 @@ android {
         versionName = "1.0.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "BANNER_AD_UNIT_ID", "\"ca-app-pub-3940256099942544/6300978111\"")
+        //buildConfigField("String", "BANNER_AD_UNIT_ID", "\"ca-app-pub-4338634405797265/1988739245\"")
     }
 
     buildTypes {
@@ -30,6 +32,7 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
@@ -39,6 +42,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
 
@@ -108,8 +112,8 @@ dependencies {
     kapt(libs.androidx.room.compiler)
 
     // Hilt for Dependency Injection
-    implementation(libs.hilt.android)
-    kapt(libs.hilt.compiler)
+    implementation("com.google.dagger:hilt-android:2.57.2")
+    kapt("com.google.dagger:hilt-compiler:2.57.2")
     implementation(libs.androidx.hilt.navigation.compose)
 
     // --- ViewModel & LiveData / StateFlow Integration ---
@@ -120,8 +124,6 @@ dependencies {
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.kotlinx.coroutines.android)
 
-
-    implementation(libs.play.services.ads)
-
-
+    implementation("com.google.android.gms:play-services-ads:24.7.0")
+    //implementation("com.google.android.gms:play-services-ads-api:24.7.0")
 }

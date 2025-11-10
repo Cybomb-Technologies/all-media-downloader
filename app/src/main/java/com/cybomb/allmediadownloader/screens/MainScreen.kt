@@ -1,5 +1,8 @@
 package com.cybomb.allmediadownloader.screens
 
+import android.annotation.SuppressLint
+import android.app.Activity
+import android.os.Bundle
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -21,6 +24,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -35,11 +39,19 @@ import com.cybomb.allmediadownloader.R
 import com.cybomb.allmediadownloader.datamodels.downloaderItems
 import com.cybomb.allmediadownloader.screens.components.PlatformIcon
 import com.cybomb.allmediadownloader.ui.theme.LightBlue
+import com.google.android.gms.ads.AdSize
+import com.google.android.gms.ads.AdView
+import androidx.compose.ui.platform.LocalContext // Needed for Context
+import androidx.compose.ui.viewinterop.AndroidView // Needed to host AdView
+import com.google.android.gms.ads.AdRequest // Needed to load the ad
+import com.cybomb.allmediadownloader.BuildConfig // <-- Make sure to import BuildConfig
+import com.google.ads.mediation.admob.AdMobAdapter
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen(navController: NavController) {
     val appTitle = "All Media Downloader" // Define the title for the App Bar
+    val bannerAdUnitId = BuildConfig.BANNER_AD_UNIT_ID // No need to define it locally
 
     Scaffold(
         topBar = {
@@ -49,7 +61,7 @@ fun MainScreen(navController: NavController) {
                     containerColor = LightBlue.copy(alpha = 0.2F)
                 )
             )
-        }
+        },
     ) { paddingValues ->
         Column(
             modifier = Modifier
@@ -107,10 +119,75 @@ fun MainScreen(navController: NavController) {
                     }
                 }
             }
+
+            Spacer(modifier = Modifier.height(96.dp))
+            AdBannerView(bannerAdUnitId = bannerAdUnitId)
         }
     }
 }
 
+// --- NEW COMPOSABLE FOR THE AD BANNER ---
+@Composable
+fun AdBannerView(bannerAdUnitId: String) {
+    val context = LocalContext.current
+
+    // Use AndroidView to embed the AdView (a traditional Android View) into Compose
+    AndroidView(
+        modifier = Modifier.fillMaxWidth(),
+        factory = {
+            // Create and configure the AdView instance
+            val adView = AdView(context).apply {
+                adUnitId = bannerAdUnitId
+                // Set the adaptive banner ad size
+                setAdSize(AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(context, 360))
+            }
+
+            // Load the ad
+            val adRequest = AdRequest.Builder().build()
+            adView.loadAd(adRequest)
+
+            adView // Return the AdView to be displayed
+        }
+    )
+}
+
+@SuppressLint("LocalContextConfigurationRead")
+@Composable
+fun AdBannerViewCollab(bannerAdUnitId: String) {
+    val context = LocalContext.current
+    // Casting context to Activity is necessary to get correct display metrics for AdSize
+    val activity = context as Activity
+
+    // 1. Calculate the adaptive ad size (requires FULL_WIDTH for collapsible)
+    val adSize = remember(context.resources.configuration.orientation) {
+        AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(activity, AdSize.FULL_WIDTH)
+    }
+
+    AndroidView(
+        // The ad should fill the width of the bottom bar
+        modifier = Modifier.fillMaxWidth(),
+        factory = {
+            AdView(context).apply {
+                this.adUnitId = bannerAdUnitId
+                this.setAdSize(adSize)
+
+                // 2. Configure the AdRequest for the Collapsible Banner Feature.
+                val extras = Bundle()
+                // Set "bottom" to collapse toward the bottom of the screen.
+                // Use "top" if you were placing it in the TopAppBar.
+                extras.putString("collapsible", "bottom")
+
+                val adRequest = AdRequest.Builder()
+                    // This is required to pass the network extras to AdMob
+                    .addNetworkExtrasBundle(AdMobAdapter::class.java, extras)
+                    .build()
+
+                // 3. Load the ad
+                this.loadAd(adRequest)
+            }
+        }
+    )
+}
 
 //@Composable
 //fun MainScreen(navController: NavController) {

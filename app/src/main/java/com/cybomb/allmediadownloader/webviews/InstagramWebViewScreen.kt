@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.cybomb.allmediadownloader.webviews
 
 import android.content.Context
@@ -136,7 +138,7 @@ fun InstagramWebViewScreen(
                 Spacer(Modifier.height(8.dp))
                 Button(
                     onClick = {
-                        // ✅ CALL THE INJECTED UNIVERSAL DOWNLOAD FUNCTION
+                        // CALL THE INJECTED UNIVERSAL DOWNLOAD FUNCTION
                         startMediaDownload(context, info)
                         onFinished(WebViewResult(true, info.postUrl)) // Go back after starting download
                     },

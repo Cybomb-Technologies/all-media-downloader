@@ -28,10 +28,21 @@ import com.cybomb.allmediadownloader.navigation.AppNavigation
 import com.cybomb.allmediadownloader.navigation.RequestStoragePermission
 import com.cybomb.allmediadownloader.screens.SplashScreen
 import com.cybomb.allmediadownloader.viewmodels.DownloadMediaInfo
+import com.google.android.gms.ads.MobileAds
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
+        CoroutineScope(Dispatchers.IO).launch {
+            // Initialize the Google Mobile Ads SDK on a background thread.
+            MobileAds.initialize(this@MainActivity) {}
+        }
+
         setContent {
             // Your custom theme should go here
             MaterialTheme(colorScheme = lightColorScheme(
