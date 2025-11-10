@@ -23,6 +23,7 @@ lifecycleViewmodelCompose = "2.8.5"
 material3 = "1.4.0"
 materialIconsCore = "1.7.8"
 navigationCompose = "2.9.5"
+playServicesAds = "24.7.0"
 roomRuntime = "2.8.2"
 ui = "1.9.3"
 
@@ -70,6 +71,7 @@ androidx-compose-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-te
 androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinxCoroutinesAndroid" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutinesCore" }
+play-services-ads = { module = "com.google.android.gms:play-services-ads", version.ref = "playServicesAds" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

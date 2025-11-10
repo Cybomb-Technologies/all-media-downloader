@@ -70,7 +70,7 @@ val downloaderItems = listOf(
     DownloaderScreen.Facebook,
     DownloaderScreen.YouTube,
     //DownloaderScreen.Twitter,
-    DownloaderScreen.Snapchat,
+    //DownloaderScreen.Snapchat,
     DownloaderScreen.Pinterest,
     DownloaderScreen.Reddit,
     DownloaderScreen.LinkedIn,

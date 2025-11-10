@@ -15,8 +15,8 @@ android {
         applicationId = "com.cybomb.allmediadownloader"
         minSdk = 24
         targetSdk = 36
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 3
+        versionName = "1.0.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -119,5 +119,9 @@ dependencies {
 // --- Coroutines (for Flows, StateFlow, suspend functions) ---
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.kotlinx.coroutines.android)
+
+
+    implementation(libs.play.services.ads)
+
 
 }

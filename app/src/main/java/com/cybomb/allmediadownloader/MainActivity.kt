@@ -56,28 +56,30 @@ fun AllInOneDownloaderApp() {
     val downloadedFiles = remember { mutableStateListOf<DownloadMediaInfo>() }
 
     // Use a LaunchedEffect to manage the splash screen duration
-    LaunchedEffect(Unit) {
-        delay(2000) // Show splash for 2 seconds
-        showSplash = false
-    }
+//    LaunchedEffect(Unit) {
+//        delay(2000) // Show splash for 2 seconds
+//        showSplash = false
+//    }
 
     Scaffold { padding ->
         Box(modifier = Modifier.padding(padding).fillMaxSize()) {
-            AnimatedVisibility(
-                visible = showSplash,
-                enter = fadeIn(animationSpec = tween(500)),
-                exit = fadeOut(animationSpec = tween(500))
-            ) {
-                SplashScreen()
-            }
+//            AnimatedVisibility(
+//                visible = showSplash,
+//                enter = fadeIn(animationSpec = tween(500)),
+//                exit = fadeOut(animationSpec = tween(500))
+//            ) {
+//                SplashScreen()
+//            }
 
-            AnimatedVisibility(
-                visible = !showSplash,
-                enter = fadeIn(animationSpec = tween(500)),
-                exit = fadeOut(animationSpec = tween(500))
-            ) {
-                AppNavigation(navController, downloadedFiles)
-            }
+//            AnimatedVisibility(
+//                visible = !showSplash,
+//                enter = fadeIn(animationSpec = tween(500)),
+//                exit = fadeOut(animationSpec = tween(500))
+//            ) {
+//                AppNavigation(navController, downloadedFiles)
+//            }
+
+            AppNavigation(navController, downloadedFiles)
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.cybomb.allmediadownloader.webviews
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.webkit.WebView
 import android.webkit.WebViewClient
@@ -15,7 +16,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Download
 import androidx.compose.material3.Button
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -43,6 +44,7 @@ import com.cybomb.allmediadownloader.datamodels.WebViewResult
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+@SuppressLint("SetJavaScriptEnabled")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun VimeoWebViewScreen(
@@ -85,7 +87,7 @@ fun VimeoWebViewScreen(
                 title = { Text("Vimeo Video Viewer") },
                 navigationIcon = {
                     IconButton(onClick = { onFinished(WebViewResult(false, currentUrl)) }) {
-                        Icon(Icons.Filled.ArrowBack, contentDescription = "Back")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
                     }
                 }
             )
