@@ -22,8 +22,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.rememberNavController
 import kotlinx.coroutines.delay
-//fetcher
-//datamodels
 import com.cybomb.allmediadownloader.navigation.AppNavigation
 import com.cybomb.allmediadownloader.navigation.RequestStoragePermission
 import com.cybomb.allmediadownloader.screens.SplashScreen
@@ -37,24 +35,44 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
-        CoroutineScope(Dispatchers.IO).launch {
-            // Initialize the Google Mobile Ads SDK on a background thread.
-            MobileAds.initialize(this@MainActivity) {}
-        }
-
-        setContent {
-            // Your custom theme should go here
-            MaterialTheme(colorScheme = lightColorScheme(
-                primary = Color(0xFF007bff), // A nice blue for the primary color
-                secondary = Color(0xFF28a745) // Green for accents/download buttons
-            )) {
-                RequestStoragePermission()
-                AllInOneDownloaderApp()
+        // Initialize ads first
+        MobileAds.initialize(this) { initializationStatus ->
+            // Ads are initialized, now set content
+            setContent {
+                MaterialTheme(colorScheme = lightColorScheme(
+                    primary = Color(0xFF007bff),
+                    secondary = Color(0xFF28a745)
+                )) {
+                    RequestStoragePermission()
+                    AllInOneDownloaderApp()
+                }
             }
         }
     }
 }
+
+//class MainActivity : ComponentActivity() {
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//
+//
+//        CoroutineScope(Dispatchers.IO).launch {
+//            // Initialize the Google Mobile Ads SDK on a background thread.
+//            MobileAds.initialize(this@MainActivity) {}
+//        }
+//
+//        setContent {
+//            // Your custom theme should go here
+//            MaterialTheme(colorScheme = lightColorScheme(
+//                primary = Color(0xFF007bff), // A nice blue for the primary color
+//                secondary = Color(0xFF28a745) // Green for accents/download buttons
+//            )) {
+//                RequestStoragePermission()
+//                AllInOneDownloaderApp()
+//            }
+//        }
+//    }
+//}
 
 @Composable
 fun AllInOneDownloaderApp() {

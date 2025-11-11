@@ -16,16 +16,17 @@ import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import com.cybomb.allmediadownloader.BuildConfig.BANNER_AD_UNIT_ID
 import com.cybomb.allmediadownloader.screens.components.DownloadContentList
 import com.cybomb.allmediadownloader.viewmodels.DownloadMediaInfo
+import com.cybomb.allmediadownloader.BuildConfig
 
 @Composable
 fun GalleryScreen(downloadedFiles: SnapshotStateList<DownloadMediaInfo>) {
     val tabs = listOf("Images", "Videos", "All Downloads")
     var selectedTabIndex by remember { mutableStateOf(0) }
     val context = LocalContext.current
-    val bannerAdUnitId = BANNER_AD_UNIT_ID // No need to define it locally
+    //val bannerAdUnitId = BANNER_AD_UNIT_ID // No need to define it locally
+    val bannerAdUnitId = BuildConfig.BANNER_AD_UNIT_ID_LIVE_TEST // No need to define it locally
 
     Column(modifier = Modifier.fillMaxSize()) {
         TabRow(selectedTabIndex = selectedTabIndex) {
@@ -39,7 +40,7 @@ fun GalleryScreen(downloadedFiles: SnapshotStateList<DownloadMediaInfo>) {
         }
 
         Spacer(modifier = Modifier.height(4.dp))
-        AdBannerViewCollab(bannerAdUnitId = bannerAdUnitId)
+        AdBannerView(bannerAdUnitId = bannerAdUnitId)
 
         when (selectedTabIndex) {
             0 -> DownloadContentList(contentType = "Image", downloadedFiles = downloadedFiles, context = context)

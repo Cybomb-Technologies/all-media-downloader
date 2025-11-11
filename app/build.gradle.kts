@@ -19,8 +19,8 @@ android {
         versionName = "1.0.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        buildConfigField("String", "BANNER_AD_UNIT_ID", "\"ca-app-pub-3940256099942544/6300978111\"")
-        //buildConfigField("String", "BANNER_AD_UNIT_ID", "\"ca-app-pub-4338634405797265/1988739245\"")
+        buildConfigField("String", "BANNER_AD_UNIT_ID_LIVE_TEST", "\"ca-app-pub-4338634405797265/1964989832\"")
+        //buildConfigField("String", "BANNER_AD_UNIT_ID", "\"ca-app-pub-3940256099942544/6300978111\"")
     }
 
     buildTypes {
