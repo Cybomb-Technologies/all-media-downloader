@@ -15,12 +15,13 @@ android {
         applicationId = "com.cybomb.allmediadownloader"
         minSdk = 24
         targetSdk = 36
-        versionCode = 3
-        versionName = "1.0.1"
+        versionCode = 4
+        versionName = "1.0.5" // adds
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField("String", "BANNER_AD_UNIT_ID_LIVE_TEST", "\"ca-app-pub-4338634405797265/1964989832\"")
         //buildConfigField("String", "BANNER_AD_UNIT_ID", "\"ca-app-pub-3940256099942544/6300978111\"")
+        buildConfigField("String", "INTERSTITIAL_AD_UNIT_ID", "\"ca-app-pub-4338634405797265/7284054683\"")
     }
 
     buildTypes {
@@ -56,6 +57,7 @@ dependencies {
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.games.activity)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
