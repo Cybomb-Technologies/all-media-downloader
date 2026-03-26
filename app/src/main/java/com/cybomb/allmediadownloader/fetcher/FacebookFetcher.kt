@@ -11,6 +11,7 @@ import org.jsoup.Jsoup
 import java.util.concurrent.TimeUnit
 import java.util.regex.Pattern
 
+@Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class FacebookFetcher {
     private val client = OkHttpClient.Builder()
         .connectTimeout(20, TimeUnit.SECONDS)

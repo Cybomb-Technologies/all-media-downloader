@@ -141,7 +141,7 @@ class InstagramFetcher {
             }
             null
         } catch (e: Exception) {
-            Log.d("InstagramFetcher", "JSON-LD extraction failed: ${e.message}")
+            //Log.d("InstagramFetcher", "JSON-LD extraction failed: ${e.message}")
             null
         }
     }
@@ -192,7 +192,7 @@ class InstagramFetcher {
             }
             null
         } catch (e: Exception) {
-            Log.d("InstagramFetcher", "_sharedData extraction failed: ${e.message}")
+          //  Log.d("InstagramFetcher", "_sharedData extraction failed: ${e.message}")
             null
         }
     }
@@ -225,7 +225,7 @@ class InstagramFetcher {
 
             null
         } catch (e: Exception) {
-            Log.d("InstagramFetcher", "OpenGraph extraction failed: ${e.message}")
+           // Log.d("InstagramFetcher", "OpenGraph extraction failed: ${e.message}")
             null
         }
     }
@@ -242,7 +242,9 @@ class InstagramFetcher {
             val matcher = pattern.matcher(html)
             if (matcher.find()) {
                 var videoUrl = matcher.group(1)
-                videoUrl = videoUrl.replace("\\u0026", "&").replace("\\/", "/")
+                if (videoUrl != null) {
+                    videoUrl = videoUrl.replace("\\u0026", "&").replace("\\/", "/")
+                }
                 if (isValidMediaUrl(videoUrl)) {
                     return DownloadMediaInfo(
                         mediaUrl = videoUrl,
@@ -264,7 +266,9 @@ class InstagramFetcher {
             val matcher = pattern.matcher(html)
             if (matcher.find()) {
                 var imageUrl = matcher.group(1)
-                imageUrl = imageUrl.replace("\\u0026", "&").replace("\\/", "/")
+                if (imageUrl != null) {
+                    imageUrl = imageUrl.replace("\\u0026", "&").replace("\\/", "/")
+                }
                 if (isValidMediaUrl(imageUrl)) {
                     return DownloadMediaInfo(
                         mediaUrl = imageUrl,

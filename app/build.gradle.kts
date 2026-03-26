@@ -15,10 +15,13 @@ android {
         applicationId = "com.cybomb.allmediadownloader"
         minSdk = 24
         targetSdk = 36
-        versionCode = 3
-        versionName = "1.0.1"
+        versionCode = 4
+        versionName = "1.0.5" // adds
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "BANNER_AD_UNIT_ID_LIVE_TEST", "\"ca-app-pub-4338634405797265/1964989832\"")
+        //buildConfigField("String", "BANNER_AD_UNIT_ID", "\"ca-app-pub-3940256099942544/6300978111\"")
+        buildConfigField("String", "INTERSTITIAL_AD_UNIT_ID", "\"ca-app-pub-4338634405797265/7284054683\"")
     }
 
     buildTypes {
@@ -30,6 +33,7 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
@@ -39,6 +43,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
 
@@ -52,6 +57,7 @@ dependencies {
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.games.activity)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -108,8 +114,8 @@ dependencies {
     kapt(libs.androidx.room.compiler)
 
     // Hilt for Dependency Injection
-    implementation(libs.hilt.android)
-    kapt(libs.hilt.compiler)
+    implementation("com.google.dagger:hilt-android:2.57.2")
+    kapt("com.google.dagger:hilt-compiler:2.57.2")
     implementation(libs.androidx.hilt.navigation.compose)
 
     // --- ViewModel & LiveData / StateFlow Integration ---
@@ -120,8 +126,6 @@ dependencies {
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.kotlinx.coroutines.android)
 
-
-    implementation(libs.play.services.ads)
-
-
+    implementation("com.google.android.gms:play-services-ads:24.7.0")
+    //implementation("com.google.android.gms:play-services-ads-api:24.7.0")
 }

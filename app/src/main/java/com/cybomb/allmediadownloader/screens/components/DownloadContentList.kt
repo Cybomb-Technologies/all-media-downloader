@@ -33,7 +33,7 @@ import com.cybomb.allmediadownloader.viewmodels.DownloadMediaInfo
 fun DownloadContentList(
     contentType: String,
     downloadedFiles: SnapshotStateList<DownloadMediaInfo>,
-    context: Context
+    context: Context,
 ) {
     // Filter the global list based on the selected tab
     val itemsToShow = remember(contentType, downloadedFiles.size) {
